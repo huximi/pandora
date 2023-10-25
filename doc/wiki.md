@@ -82,9 +82,10 @@
 
 * Docker Hub运行
 
-  ```shell
+  ```shell  
+  docker volume create pandora_data
   docker pull pengzhile/pandora
-  docker run -it --rm pengzhile/pandora
+  docker run -itd --name pandora --restart=always -e PANDORA_CLOUD=cloud -e PANDORA_SERVER=0.0.0.0:8018  -v pandora_data:/data -v  /etc/localtime:/etc/localtime -p 8018:8018 pengzhile/pandora
   ```
 
 * Docker编译运行
@@ -92,7 +93,7 @@
   ```shell
   docker build -t pandora .
   docker run -it --rm pandora
-  ```
+  ```  
   
 * Serverless部署见项目：[pandora-cloud-serverless](https://github.com/zhile-io/pandora-cloud-serverless)
 
